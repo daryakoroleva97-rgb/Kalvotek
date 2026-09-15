@@ -61,6 +61,7 @@ export function VisualizerApp() {
           <h3 id="model-heading" className="text-sm font-semibold text-foreground">
             1. Choose a body style
           </h3>
+          <p className="mt-1 text-xs text-muted">Modeled on Volvo&apos;s lineup — pick whichever is closest to your own car.</p>
           <div className="mt-3 grid grid-cols-2 gap-2">
             {carModels.map((model) => (
               <button

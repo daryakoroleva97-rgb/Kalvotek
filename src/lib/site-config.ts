@@ -89,11 +89,13 @@ export type CarModelOption = {
   bodyType: string;
 };
 
+// Modeled on Volvo's current lineup as the visualizer's demo vehicle —
+// pick whichever silhouette is closest to your own car's shape.
 export const carModels: CarModelOption[] = [
-  { id: "sedan", name: "Sedan", bodyType: "4-door sedan" },
-  { id: "suv", name: "SUV", bodyType: "Mid-size SUV" },
-  { id: "hatchback", name: "Hatchback", bodyType: "Compact hatchback" },
-  { id: "coupe", name: "Coupe", bodyType: "2-door coupe" },
+  { id: "s60", name: "S60", bodyType: "Volvo sedan" },
+  { id: "xc90", name: "XC90", bodyType: "Volvo 3-row SUV" },
+  { id: "v60", name: "V60", bodyType: "Volvo wagon" },
+  { id: "c40", name: "C40", bodyType: "Volvo coupe SUV" },
 ];
 
 export type CarColorOption = {

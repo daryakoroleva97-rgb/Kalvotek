@@ -44,7 +44,11 @@ function Wheel({
 }
 
 export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: CarModelProps) {
-  const params = carModelParams[modelId] ?? carModelParams.sedan;
+  const params = carModelParams[modelId] ?? carModelParams.s60;
+
+  const cabinBottomWidth = params.width - params.bodyTopShrink * 2 - 0.05;
+  const cabinTopWidth = cabinBottomWidth - params.cabinTopShrinkX * 2;
+  const cabinTopLength = params.cabinLength - params.cabinTopShrinkZ;
 
   const geometries = useMemo(() => {
     const body = createFrustumGeometry({
@@ -55,10 +59,6 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
       h: params.bodyHeight,
       offsetZ: (params.hoodTaper - params.tailTaper) / 2,
     });
-
-    const cabinBottomWidth = params.width - params.bodyTopShrink * 2 - 0.05;
-    const cabinTopWidth = cabinBottomWidth - params.cabinTopShrinkX * 2;
-    const cabinTopLength = params.cabinLength - params.cabinTopShrinkZ;
 
     const cabin = createFrustumGeometry({
       bw: cabinBottomWidth,
@@ -77,7 +77,7 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
     });
 
     return { body, cabin, roof };
-  }, [params]);
+  }, [params, cabinBottomWidth, cabinTopWidth, cabinTopLength]);
 
   const bodyBottomY = params.wheelRadius * 0.55 + params.groundClearance;
 
@@ -109,8 +109,22 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
     () => new THREE.MeshStandardMaterial({ color: "#fff6dd", emissive: "#fff3c4", emissiveIntensity: 0.9 }),
     [],
   );
+  // The "Thor's Hammer" DRL accent reads as cool white/blue, distinct from
+  // the warmer main headlight — the signature Volvo daytime running light look.
+  const drlMaterial = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: "#eaf3ff", emissive: "#cfe8ff", emissiveIntensity: 1.1 }),
+    [],
+  );
   const tailLightMaterial = useMemo(
     () => new THREE.MeshStandardMaterial({ color: "#5c0d10", emissive: "#a5131a", emissiveIntensity: 0.7 }),
+    [],
+  );
+  const grilleMaterial = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: "#101113", roughness: 0.4, metalness: 0.6 }),
+    [],
+  );
+  const roofRailMaterial = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: "#3a3d42", roughness: 0.4, metalness: 0.7 }),
     [],
   );
   const mirrorMaterial = bodyMaterial;
@@ -129,6 +143,13 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
   const frontZ = frontZAt(lightF) + 0.02;
   const rearZ = rearZAt(lightF) - 0.02;
 
+  const tailBarWidth = lightHalfWidth * 2 - 0.16;
+  const grilleHalfWidth = Math.max(lightHalfWidth - 0.62, 0.28);
+  const hammerAngle = 0.5;
+
+  const roofTopY = bodyBottomY + params.bodyHeight + params.cabinHeight + params.roofThickness;
+  const roofRailZ = cabinTopLength * 0.36;
+
   return (
     <group>
       <mesh geometry={geometries.body} material={bodyMaterial} position={[0, bodyBottomY, 0]} castShadow receiveShadow />
@@ -143,20 +164,38 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
         position={[0, bodyBottomY + params.bodyHeight + params.cabinHeight, params.cabinZOffset]}
       />
 
-      {/* headlights */}
+      {/* headlights, main housing */}
       <mesh position={[lightHalfWidth - 0.26, lightY, frontZ]} material={lightMaterial}>
-        <boxGeometry args={[0.32, 0.13, 0.05]} />
+        <boxGeometry args={[0.3, 0.12, 0.05]} />
       </mesh>
       <mesh position={[-(lightHalfWidth - 0.26), lightY, frontZ]} material={lightMaterial}>
-        <boxGeometry args={[0.32, 0.13, 0.05]} />
+        <boxGeometry args={[0.3, 0.12, 0.05]} />
       </mesh>
 
-      {/* taillights */}
-      <mesh position={[lightHalfWidth - 0.24, lightY + 0.05, rearZ]} material={tailLightMaterial}>
-        <boxGeometry args={[0.28, 0.15, 0.05]} />
+      {/* "Thor's Hammer" DRL accent — Volvo's signature headlight mark */}
+      <mesh
+        position={[lightHalfWidth - 0.16, lightY + 0.13, frontZ]}
+        rotation={[0, 0, -hammerAngle]}
+        material={drlMaterial}
+      >
+        <boxGeometry args={[0.24, 0.04, 0.045]} />
       </mesh>
-      <mesh position={[-(lightHalfWidth - 0.24), lightY + 0.05, rearZ]} material={tailLightMaterial}>
-        <boxGeometry args={[0.28, 0.15, 0.05]} />
+      <mesh
+        position={[-(lightHalfWidth - 0.16), lightY + 0.13, frontZ]}
+        rotation={[0, 0, hammerAngle]}
+        material={drlMaterial}
+      >
+        <boxGeometry args={[0.24, 0.04, 0.045]} />
+      </mesh>
+
+      {/* vertical-slat grille block between the headlights */}
+      <mesh position={[0, lightY + 0.05, frontZ + 0.015]} material={grilleMaterial}>
+        <boxGeometry args={[grilleHalfWidth * 2, 0.26, 0.03]} />
+      </mesh>
+
+      {/* full-width LED tail lightbar — Volvo's signature rear graphic */}
+      <mesh position={[0, lightY + 0.05, rearZ]} material={tailLightMaterial}>
+        <boxGeometry args={[tailBarWidth, 0.1, 0.05]} />
       </mesh>
 
       {/* side mirrors */}
@@ -174,6 +213,18 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
       >
         <boxGeometry args={[0.12, 0.08, 0.16]} />
       </mesh>
+
+      {/* roof rails — SUV and wagon only */}
+      {params.hasRoofRails && (
+        <>
+          <mesh position={[cabinTopWidth / 2 - 0.06, roofTopY + 0.025, params.cabinZOffset]} material={roofRailMaterial}>
+            <boxGeometry args={[0.05, 0.045, roofRailZ * 2]} />
+          </mesh>
+          <mesh position={[-(cabinTopWidth / 2 - 0.06), roofTopY + 0.025, params.cabinZOffset]} material={roofRailMaterial}>
+            <boxGeometry args={[0.05, 0.045, roofRailZ * 2]} />
+          </mesh>
+        </>
+      )}
 
       <Wheel x={params.trackX} z={-params.wheelbaseZ} radius={params.wheelRadius} width={params.wheelWidth} />
       <Wheel x={-params.trackX} z={-params.wheelbaseZ} radius={params.wheelRadius} width={params.wheelWidth} />

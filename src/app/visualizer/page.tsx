@@ -17,7 +17,8 @@ export default function VisualizerPage() {
         </h1>
         <p className="mt-4 text-muted">
           Pick a body style close to yours, match your paint color, then try every shade we offer —
-          5%, 10%, 15%, 25%, 35%, and 50% — to get a feel for how dark you want to go.
+          5%, 10%, 15%, 25%, 35%, and 50% — to get a feel for how dark you want to go. The demo car
+          is modeled on Volvo&apos;s lineup, but every shade below applies the same to any make or model.
         </p>
       </div>
 
