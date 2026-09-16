@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const ASSET_PATH = "https://kalvotek.com/templates/LuxuryHD/images/tint";
+const ASSET_PATH = "/tint";
 const COLOR_VALUES = [0, 1, 2, 3, 4, 5, 6];
 const COLOR_NAMES = ["White", "Silver", "Crimson Red", "Green", "Navy Blue", "Anthracite", "Black"];
 const GLASS_VALUES = [0, 70, 50, 35, 20, 15, 5];
@@ -18,7 +18,7 @@ export function TintPreview() {
       <div className="relative mx-auto aspect-video w-full max-w-[900px] overflow-hidden rounded-2xl border border-border bg-white">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${ASSET_PATH}/colorimg-${COLOR_VALUES[colorIndex]}.png`}
+          src={`${ASSET_PATH}/colorimg-${COLOR_VALUES[colorIndex]}.jpg`}
           alt={`Volvo S60, ${COLOR_NAMES[colorIndex]}`}
           className="absolute inset-0 h-full w-full object-contain"
         />
