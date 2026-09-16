@@ -39,17 +39,33 @@ export function VisualizerApp() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
       <div className="overflow-hidden rounded-2xl border border-border bg-surface">
-        <div className="h-[380px] sm:h-[460px] lg:h-[600px]">
-          <CarScene
-            modelId={modelId}
-            colorHex={activeColor.hex}
-            metalness={activeColor.metalness}
-            roughness={activeColor.roughness}
-            tintVlt={nearestShade.vlt}
-          />
+        <div className="relative">
+          <span className="pointer-events-none absolute left-4 top-3 z-10 text-sm font-semibold text-accent drop-shadow-sm">
+            Preview your tint
+          </span>
+          <div className="h-[220px] sm:h-[260px] lg:h-[300px]">
+            <CarScene
+              view="side"
+              modelId={modelId}
+              colorHex={activeColor.hex}
+              metalness={activeColor.metalness}
+              roughness={activeColor.roughness}
+              tintVlt={nearestShade.vlt}
+            />
+          </div>
+          <div className="h-[240px] sm:h-[280px] lg:h-[320px] border-t border-border/60">
+            <CarScene
+              view="rear3q"
+              modelId={modelId}
+              colorHex={activeColor.hex}
+              metalness={activeColor.metalness}
+              roughness={activeColor.roughness}
+              tintVlt={nearestShade.vlt}
+            />
+          </div>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-4 py-3 text-xs text-muted">
-          <span>Drag to rotate · scroll to zoom</span>
+          <span>Static preview — windshield stays clear, side and rear glass show the selected shade</span>
           <span>
             {carModels.find((m) => m.id === modelId)?.name} · {activeColor.name} · {nearestShade.label} tint
           </span>

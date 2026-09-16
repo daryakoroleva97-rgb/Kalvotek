@@ -54,5 +54,13 @@ export function createFrustumGeometry({ bw, bd, tw, td, h, offsetX = 0, offsetZ 
   geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
   geometry.setIndex(index);
   geometry.computeVertexNormals();
+
+  // Material groups so callers can render the front face (e.g. a
+  // windshield) with a different material than the rest of the shape —
+  // bottom+top: indices [0,12), front: [12,18), back+left+right: [18,36).
+  geometry.addGroup(0, 12, 1);
+  geometry.addGroup(12, 6, 0);
+  geometry.addGroup(18, 18, 1);
+
   return geometry;
 }

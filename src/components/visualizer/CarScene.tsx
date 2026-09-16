@@ -2,8 +2,12 @@
 
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, ContactShadows } from "@react-three/drei";
+import { ContactShadows, Environment, Lightformer } from "@react-three/drei";
 import { CarModel } from "./CarModel";
+
+export const STUDIO_BG = "#3d4451";
+
+type CarView = "side" | "rear3q";
 
 type CarSceneProps = {
   modelId: string;
@@ -11,53 +15,51 @@ type CarSceneProps = {
   metalness: number;
   roughness: number;
   tintVlt: number;
+  view: CarView;
 };
 
-export function CarScene(props: CarSceneProps) {
+// Fixed studio-style camera presets — no orbit/spin, matching a flat product
+// photo composition (a side profile shot plus a rear three-quarter shot)
+// rather than a freely-rotatable model.
+const CAMERA_PRESETS: Record<CarView, { position: [number, number, number]; fov: number }> = {
+  side: { position: [8.4, 1.05, 0.9], fov: 20 },
+  rear3q: { position: [5.4, 2.0, 5.6], fov: 26 },
+};
+
+export function CarScene({ view, ...props }: CarSceneProps) {
+  const preset = CAMERA_PRESETS[view];
+
   return (
     <Canvas
       shadows
       dpr={[1, 1.75]}
-      camera={{ position: [4.2, 1.7, 4.6], fov: 32 }}
+      camera={{ position: preset.position, fov: preset.fov }}
       gl={{ antialias: true }}
+      onCreated={({ camera }) => camera.lookAt(0, 0.62, 0)}
     >
-      <color attach="background" args={["#101216"]} />
-      <fog attach="fog" args={["#101216", 9, 18]} />
+      <color attach="background" args={[STUDIO_BG]} />
 
-      <ambientLight intensity={0.55} />
-      <directionalLight
-        position={[4, 6, 3]}
-        intensity={1.6}
-        castShadow
-        shadow-mapSize={[1024, 1024]}
-        shadow-camera-left={-4}
-        shadow-camera-right={4}
-        shadow-camera-top={4}
-        shadow-camera-bottom={-4}
-      />
-      <directionalLight position={[-5, 3, -4]} intensity={0.5} color="#8fb4ff" />
-      <pointLight position={[0, 2.4, -3]} intensity={0.4} color="#c9973f" />
+      {/* Bright, even studio lighting — a catalog photo look, not a moody scene. */}
+      <ambientLight intensity={1.0} />
+      <directionalLight position={[3, 6, 5]} intensity={1.1} castShadow shadow-mapSize={[1024, 1024]} />
+      <directionalLight position={[-5, 4, -2]} intensity={0.55} />
+      <directionalLight position={[0, 3, -6]} intensity={0.4} />
 
       <Suspense fallback={null}>
         <CarModel {...props} />
       </Suspense>
 
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
-        <circleGeometry args={[7, 48]} />
-        <meshStandardMaterial color="#181a1f" roughness={0.95} metalness={0} />
-      </mesh>
-      <ContactShadows position={[0, 0.001, 0]} opacity={0.65} scale={10} blur={2} far={2} resolution={512} />
+      {/* Self-contained studio reflection rig (baked from simple light
+          panels, not an external HDRI) so the clearcoat paint picks up
+          soft gradient highlights instead of looking flat/matte. */}
+      <Environment resolution={256}>
+        <Lightformer intensity={2.2} color="#ffffff" position={[0, 5, -6]} scale={[10, 5, 1]} />
+        <Lightformer intensity={1.1} color="#ffffff" position={[-6, 1.5, 4]} rotation-y={Math.PI / 2} scale={[6, 4, 1]} />
+        <Lightformer intensity={1.1} color="#ffffff" position={[6, 1.5, 4]} rotation-y={-Math.PI / 2} scale={[6, 4, 1]} />
+        <Lightformer intensity={0.6} color={STUDIO_BG} position={[0, -4, 0]} rotation-x={Math.PI / 2} scale={[20, 20, 1]} />
+      </Environment>
 
-      <OrbitControls
-        enablePan={false}
-        minDistance={3}
-        maxDistance={9}
-        minPolarAngle={Math.PI / 6}
-        maxPolarAngle={Math.PI / 2.1}
-        target={[0, 0.6, 0]}
-        autoRotate
-        autoRotateSpeed={1.1}
-      />
+      <ContactShadows position={[0, 0.001, 0]} opacity={0.5} scale={10} blur={2.2} far={2} resolution={512} color="#000000" />
     </Canvas>
   );
 }

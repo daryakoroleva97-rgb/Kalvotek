@@ -14,6 +14,8 @@ type CarModelProps = {
   tintVlt: number;
 };
 
+const SPOKE_ANGLES = [0, 1, 2, 3, 4].map((i) => (i * Math.PI * 2) / 5);
+
 function Wheel({
   x,
   z,
@@ -29,16 +31,28 @@ function Wheel({
     <group position={[x, radius, z]}>
       <mesh rotation={[0, 0, Math.PI / 2]} castShadow receiveShadow>
         <cylinderGeometry args={[radius, radius, width, 24]} />
-        <meshStandardMaterial color="#26282c" roughness={0.75} metalness={0.15} />
+        <meshStandardMaterial color="#101113" roughness={0.7} metalness={0.2} />
       </mesh>
-      <mesh rotation={[0, 0, Math.PI / 2]} position={[width * 0.53, 0, 0]}>
-        <cylinderGeometry args={[radius * 0.62, radius * 0.62, width * 0.14, 8]} />
-        <meshStandardMaterial color="#dfe2e6" roughness={0.25} metalness={0.9} />
-      </mesh>
-      <mesh rotation={[0, 0, Math.PI / 2]} position={[-width * 0.53, 0, 0]}>
-        <cylinderGeometry args={[radius * 0.62, radius * 0.62, width * 0.14, 8]} />
-        <meshStandardMaterial color="#dfe2e6" roughness={0.25} metalness={0.9} />
-      </mesh>
+      {[width * 0.53, -width * 0.53].map((rimX) => (
+        <group key={rimX} position={[rimX, 0, 0]}>
+          <mesh rotation={[0, 0, Math.PI / 2]}>
+            <cylinderGeometry args={[radius * 0.62, radius * 0.62, width * 0.1, 20]} />
+            <meshStandardMaterial color="#dde1e6" roughness={0.2} metalness={0.95} />
+          </mesh>
+          <mesh rotation={[0, 0, Math.PI / 2]} position={[width * 0.02 * Math.sign(rimX || 1), 0, 0]}>
+            <cylinderGeometry args={[radius * 0.2, radius * 0.2, width * 0.13, 16]} />
+            <meshStandardMaterial color="#eef0f3" roughness={0.15} metalness={0.95} />
+          </mesh>
+          {SPOKE_ANGLES.map((angle) => (
+            <group key={angle} rotation={[angle, 0, 0]}>
+              <mesh position={[width * 0.02 * Math.sign(rimX || 1), radius * 0.42, 0]}>
+                <boxGeometry args={[width * 0.4, radius * 0.7, radius * 0.13]} />
+                <meshStandardMaterial color="#dde1e6" roughness={0.2} metalness={0.95} />
+              </mesh>
+            </group>
+          ))}
+        </group>
+      ))}
     </group>
   );
 }
@@ -83,10 +97,12 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
 
   const bodyMaterial = useMemo(
     () =>
-      new THREE.MeshStandardMaterial({
+      new THREE.MeshPhysicalMaterial({
         color: colorHex,
         metalness,
         roughness,
+        clearcoat: 1,
+        clearcoatRoughness: 0.12,
         flatShading: true,
       }),
     [colorHex, metalness, roughness],
@@ -104,6 +120,25 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
       side: THREE.DoubleSide,
     });
   }, [tintVlt]);
+
+  // Windshields are legally untinted almost everywhere, so — matching real
+  // installs — this stays a fixed light "clear glass" look regardless of
+  // the selected shade, while the side/rear glass darkens.
+  const windshieldMaterial = useMemo(
+    () =>
+      new THREE.MeshBasicMaterial({
+        color: "#c3ccd3",
+        transparent: true,
+        opacity: 0.3,
+        side: THREE.DoubleSide,
+      }),
+    [],
+  );
+
+  const cabinMaterials = useMemo(
+    () => [windshieldMaterial, glassMaterial],
+    [windshieldMaterial, glassMaterial],
+  );
 
   const lightMaterial = useMemo(
     () => new THREE.MeshStandardMaterial({ color: "#fff6dd", emissive: "#fff3c4", emissiveIntensity: 0.9 }),
@@ -125,6 +160,10 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
   );
   const roofRailMaterial = useMemo(
     () => new THREE.MeshStandardMaterial({ color: "#3a3d42", roughness: 0.4, metalness: 0.7 }),
+    [],
+  );
+  const rockerMaterial = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: "#1b1c1e", roughness: 0.85, metalness: 0.1 }),
     [],
   );
   const mirrorMaterial = bodyMaterial;
@@ -155,7 +194,7 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
       <mesh geometry={geometries.body} material={bodyMaterial} position={[0, bodyBottomY, 0]} castShadow receiveShadow />
       <mesh
         geometry={geometries.cabin}
-        material={glassMaterial}
+        material={cabinMaterials}
         position={[0, bodyBottomY + params.bodyHeight, params.cabinZOffset]}
       />
       <mesh
@@ -212,6 +251,14 @@ export function CarModel({ modelId, colorHex, metalness, roughness, tintVlt }: C
         castShadow
       >
         <boxGeometry args={[0.12, 0.08, 0.16]} />
+      </mesh>
+
+      {/* lower rocker cladding */}
+      <mesh position={[params.width / 2 + 0.01, bodyBottomY + 0.05, 0]} material={rockerMaterial}>
+        <boxGeometry args={[0.03, 0.09, params.length * 0.62]} />
+      </mesh>
+      <mesh position={[-(params.width / 2 + 0.01), bodyBottomY + 0.05, 0]} material={rockerMaterial}>
+        <boxGeometry args={[0.03, 0.09, params.length * 0.62]} />
       </mesh>
 
       {/* roof rails — SUV and wagon only */}
