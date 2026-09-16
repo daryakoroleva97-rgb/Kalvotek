@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-const ASSET_PATH = "/tint";
+const ASSET_PATH =
+  "https://cdn.jsdelivr.net/gh/daryakoroleva97-rgb/Kalvotek@9790ed7/public/tint";
 const COLOR_VALUES = [0, 1, 2, 3, 4, 5, 6];
 const COLOR_NAMES = ["White", "Silver", "Crimson Red", "Green", "Navy Blue", "Anthracite", "Black"];
 const GLASS_VALUES = [0, 70, 50, 35, 20, 15, 5];
