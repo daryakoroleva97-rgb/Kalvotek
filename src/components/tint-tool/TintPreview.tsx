@@ -15,7 +15,7 @@ export function TintPreview() {
 
   return (
     <div>
-      <div className="relative mx-auto aspect-video w-full max-w-[900px] overflow-hidden rounded-2xl border border-border bg-white">
+      <div className="relative mx-auto aspect-[175/158] w-full max-w-[560px] overflow-hidden rounded-2xl border border-border bg-white">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`${ASSET_PATH}/colorimg-${COLOR_VALUES[colorIndex]}.jpg`}
