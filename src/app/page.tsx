@@ -5,6 +5,7 @@ import { PhotoPlaceholder } from "@/components/ui/PhotoPlaceholder";
 import {
   faqs,
   nearbyLandmarks,
+  services,
   siteConfig,
   tintShades,
   totalProcessDuration,
@@ -72,6 +73,26 @@ export default function Home() {
             <div key={item.title} className="rounded-2xl border border-border bg-surface p-6">
               <h3 className="font-semibold text-foreground">{item.title}</h3>
               <p className="mt-2 text-sm text-muted">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="container-page py-16">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-accent">What we do</p>
+            <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">Beyond window tint</h2>
+          </div>
+          <ButtonLink href="/services" variant="secondary">
+            View all services
+          </ButtonLink>
+        </div>
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <div key={service.slug} className="rounded-2xl border border-border bg-surface p-5">
+              <h3 className="font-semibold text-foreground">{service.name}</h3>
+              <p className="mt-2 text-sm text-muted">{service.shortDescription}</p>
             </div>
           ))}
         </div>

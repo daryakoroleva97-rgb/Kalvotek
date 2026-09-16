@@ -1,11 +1,8 @@
 export const siteConfig = {
   name: "Kalvotek",
   fullName: "Kalvotek",
-  tagline: "Precision window tinting for a cooler, safer, sharper ride.",
-  // Sourced from public Finnish business directories (SuomenLista, Fonecta,
-  // autojerry.fi) — kalvotek.com itself was not reachable from this
-  // environment's network, so please double-check these against the live
-  // site before publishing.
+  tagline: "Car tinting, window film, PPF, and headlight care for a cooler, sharper ride.",
+  // Verified against kalvotek.com.
   phone: "+358 44 210 2511",
   phoneHref: "tel:+358442102511",
   email: "kalvotek@gmail.com",
@@ -21,15 +18,13 @@ export const siteConfig = {
     full: "Postitorvenkatu 30, 33840 Tampere, Finland",
     mapsQuery: "Postitorvenkatu+30+33840+Tampere+Finland",
   },
-  // TODO: confirm actual opening hours — not publicly listed in any
-  // directory found, these are a reasonable placeholder.
   hours: [
-    { day: "Monday", hours: "9:00 AM – 6:00 PM" },
-    { day: "Tuesday", hours: "9:00 AM – 6:00 PM" },
-    { day: "Wednesday", hours: "9:00 AM – 6:00 PM" },
-    { day: "Thursday", hours: "9:00 AM – 6:00 PM" },
-    { day: "Friday", hours: "9:00 AM – 6:00 PM" },
-    { day: "Saturday", hours: "9:00 AM – 3:00 PM" },
+    { day: "Monday", hours: "9:00 AM – 5:00 PM" },
+    { day: "Tuesday", hours: "9:00 AM – 5:00 PM" },
+    { day: "Wednesday", hours: "9:00 AM – 5:00 PM" },
+    { day: "Thursday", hours: "9:00 AM – 5:00 PM" },
+    { day: "Friday", hours: "9:00 AM – 5:00 PM" },
+    { day: "Saturday", hours: "Closed" },
     { day: "Sunday", hours: "Closed" },
   ],
   // TODO: replace with the real external booking system URL.
@@ -80,6 +75,58 @@ export const tintShades: TintShade[] = [
     label: "50%",
     description: "Light. A soft factory-style tint with mild heat rejection.",
     swatch: "#7a808a",
+  },
+];
+
+export type Service = {
+  slug: string;
+  name: string;
+  shortDescription: string;
+  description: string;
+};
+
+export const services: Service[] = [
+  {
+    slug: "car-window-tinting",
+    name: "Car Window Tinting",
+    shortDescription: "Precision-cut film in six shades, backed by a 5-year warranty.",
+    description:
+      "Premium American window film installed with a computer-plotted or hand cut for a flush, gap-free edge on every window. Choose from six shades, 5% to 50% VLT, and preview them on our 3D visualizer before you book.",
+  },
+  {
+    slug: "residential-window-film",
+    name: "Property Window Film",
+    shortDescription: "Sun and privacy film for homes, cabins, and businesses.",
+    description:
+      "The same heat- and glare-rejecting film technology applied to home, cabin, and commercial windows — cuts sun damage and cooling costs while adding privacy, without losing natural light.",
+  },
+  {
+    slug: "headlight-restoration",
+    name: "Headlight Polishing & Restoration",
+    shortDescription: "Clear up yellowed, foggy headlights and restore full brightness.",
+    description:
+      "Oxidized, cloudy headlight lenses are wet-sanded and polished back to clarity, restoring both looks and nighttime visibility.",
+  },
+  {
+    slug: "paint-protection-film",
+    name: "Paint Protection Film (PPF)",
+    shortDescription: "A near-invisible shield against chips, scratches, and road grime.",
+    description:
+      "Self-healing PPF applied to high-impact panels (or the full vehicle) protects your paint from rock chips, minor scratches, and road debris while staying virtually invisible.",
+  },
+  {
+    slug: "chrome-delete",
+    name: "Chrome Trim Wrapping (Chrome Delete)",
+    shortDescription: "Wrap factory chrome trim in a matte or gloss black finish.",
+    description:
+      "Factory chrome trim — window surrounds, grilles, badges — is wrapped in a durable matte or gloss black vinyl for a cleaner, blacked-out look without permanently modifying the trim.",
+  },
+  {
+    slug: "headlight-tinting",
+    name: "Headlight Tinting",
+    shortDescription: "Smoked or colored film for headlights and taillights.",
+    description:
+      "A tinted film layer applied over headlight or taillight lenses for a smoked, custom look, installed to stay street-legal for on-road use.",
   },
 ];
 
