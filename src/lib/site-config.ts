@@ -19,8 +19,8 @@ export const siteConfig = {
     full: "Postitorvenkatu 30, 33840 Tampere, Finland",
     mapsQuery: "Postitorvenkatu+30+33840+Tampere+Finland",
   },
-  // TODO: replace with the real external booking system URL.
-  reservationUrl: "https://booking.kalvotek.com/reserve",
+  // Verified against kalvotek.com's own booking link (nettiaika.fi/kalvotek).
+  reservationUrl: "https://nettiaika.fi/kalvotek",
 } as const;
 
 export type TintShade = {
@@ -30,11 +30,12 @@ export type TintShade = {
 };
 
 // VLT (Visible Light Transmission) — lower % lets in less light and looks darker.
+// Matches the shades kalvotek.com actually offers (and the tint preview tool's own images).
 export const tintShades: TintShade[] = [
   { vlt: 5, label: "5%", swatch: "#0a0a0c" },
-  { vlt: 10, label: "10%", swatch: "#151517" },
-  { vlt: 15, label: "15%", swatch: "#232427" },
-  { vlt: 25, label: "25%", swatch: "#3a3d43" },
-  { vlt: 35, label: "35%", swatch: "#565b63" },
-  { vlt: 50, label: "50%", swatch: "#7a808a" },
+  { vlt: 15, label: "15%", swatch: "#151517" },
+  { vlt: 20, label: "20%", swatch: "#232427" },
+  { vlt: 35, label: "35%", swatch: "#3a3d43" },
+  { vlt: 50, label: "50%", swatch: "#565b63" },
+  { vlt: 70, label: "70%", swatch: "#7a808a" },
 ];

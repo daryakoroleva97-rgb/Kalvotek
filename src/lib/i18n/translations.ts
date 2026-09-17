@@ -135,7 +135,7 @@ const en: Translations = {
     kicker: "Tampere's window tint specialists",
     title: "A cooler, sharper, more private ride — in about 2 hours.",
     subtitle:
-      "Kalvotek installs precision-cut window film in six shades, from a light factory-style 50% down to a limo-dark 5%. Preview every shade before you commit, then book your install online.",
+      "Kalvotek installs precision-cut window film in six shades, from a light factory-style 70% down to a limo-dark 5%. Preview every shade before you commit, then book your install online.",
     ctaTint: "Try the Tint Preview",
     photoLabel: "Tint preview",
     photoCaption: "Pick a color & glass tint",
@@ -143,15 +143,15 @@ const en: Translations = {
     highlights: [
       {
         title: "6 precision shades",
-        body: "From a subtle 50% to a limo-dark 5%, preview and choose exactly how dark you want to go.",
+        body: "From a subtle 70% to a limo-dark 5%, preview and choose exactly how dark you want to go.",
       },
       {
         title: "~2 hour install",
         body: "A standard full-car install takes about two hours, start to finish, while you wait or run errands nearby.",
       },
       {
-        title: "Lifetime warranty",
-        body: "Every install is covered against bubbling, peeling, and color shift for as long as you own the car.",
+        title: "5-year warranty",
+        body: "Every install is backed by a 5-year warranty against bubbling, peeling, and color shift.",
       },
     ],
     beyondKicker: "What we do",
@@ -194,7 +194,7 @@ const en: Translations = {
         name: "Car Window Tinting",
         shortDescription: "Precision-cut film in six shades, backed by a 5-year warranty.",
         description:
-          "Premium American window film installed with a computer-plotted or hand cut for a flush, gap-free edge on every window. Choose from six shades, 5% to 50% VLT, and preview them on our tint tool before you book.",
+          "Premium American window film installed with a computer-plotted or hand cut for a flush, gap-free edge on every window. Choose from six shades, 5% to 70% VLT, and preview them on our tint tool before you book.",
       },
       {
         slug: "residential-window-film",
@@ -249,7 +249,7 @@ const en: Translations = {
       {
         question: "What tint shades do you offer?",
         answer:
-          "We install six shades: 5%, 10%, 15%, 25%, 35%, and 50% VLT. Use our tint preview tool to see each one before you decide.",
+          "We install six shades: 5%, 15%, 20%, 35%, 50%, and 70% VLT. Use our tint preview tool to see each one before you decide.",
       },
       {
         question: "Which shade is legal for my car?",
@@ -264,7 +264,7 @@ const en: Translations = {
       {
         question: "Will tint bubble, peel, or turn purple over time?",
         answer:
-          "Not with our film. Every installation includes a lifetime warranty covering bubbling, peeling, cracking, and color fade — the film we use is dyed and ceramic-infused, not the cheap dyed film that discolors in the sun.",
+          "Not with our film. Every installation includes a 5-year warranty covering bubbling, peeling, cracking, and color fade — the film we use is dyed and ceramic-infused, not the cheap dyed film that discolors in the sun.",
       },
       {
         question: "Can you remove old or failing tint before installing new film?",
@@ -386,7 +386,7 @@ const en: Translations = {
       },
       {
         title: "Warranty follows the film, not just the shade",
-        body: "Every install is backed by a lifetime warranty against bubbling, peeling, and color shift, regardless of which of our six shades you choose.",
+        body: "Every install is backed by a 5-year warranty against bubbling, peeling, and color shift, regardless of which of our six shades you choose.",
       },
     ],
   },
@@ -426,7 +426,7 @@ const fi: Translations = {
     kicker: "Tampereen ikkunakalvoasiantuntija",
     title: "Viileämpi, terävämpi ja yksityisempi ajokokemus — noin 2 tunnissa.",
     subtitle:
-      "Kalvotek asentaa tarkasti leikatun ikkunakalvon kuudessa sävyssä, vaalean tehdastyylisestä 50 %:sta limusiinin tummaan 5 %:iin. Esikatsele jokainen sävy ennen päätöstä ja varaa asennus verkossa.",
+      "Kalvotek asentaa tarkasti leikatun ikkunakalvon kuudessa sävyssä, vaalean tehdastyylisestä 70 %:sta limusiinin tummaan 5 %:iin. Esikatsele jokainen sävy ennen päätöstä ja varaa asennus verkossa.",
     ctaTint: "Kokeile kalvon esikatselua",
     photoLabel: "Kalvon esikatselu",
     photoCaption: "Valitse väri ja kalvon sävy",
@@ -434,15 +434,15 @@ const fi: Translations = {
     highlights: [
       {
         title: "6 tarkkaa sävyä",
-        body: "Aina hienovaraisesta 50 %:sta limusiinin tummaan 5 %:iin — esikatsele ja valitse juuri sopiva tummuus.",
+        body: "Aina hienovaraisesta 70 %:sta limusiinin tummaan 5 %:iin — esikatsele ja valitse juuri sopiva tummuus.",
       },
       {
         title: "~2 tunnin asennus",
         body: "Tavallinen koko auton asennus kestää alusta loppuun noin kaksi tuntia — odota paikan päällä tai hoida asioita lähistöllä.",
       },
       {
-        title: "Elinikäinen takuu",
-        body: "Jokainen asennus on suojattu kuplimista, irtoamista ja värimuutosta vastaan niin kauan kuin omistat auton.",
+        title: "5 vuoden takuu",
+        body: "Jokainen asennus on suojattu 5 vuoden takuulla kuplimista, irtoamista ja värimuutosta vastaan.",
       },
     ],
     beyondKicker: "Mitä teemme",
@@ -485,7 +485,7 @@ const fi: Translations = {
         name: "Auton ikkunakalvotus",
         shortDescription: "Tarkasti leikattu kalvo kuudessa sävyssä, 5 vuoden takuulla.",
         description:
-          "Laadukas amerikkalainen ikkunakalvo asennetaan tietokoneohjatusti tai käsin leikaten, jolloin reuna istuu tiiviisti jokaiseen ikkunaan. Valitse kuudesta sävystä, 5–50 % VLT, ja esikatsele niitä kalvotyökalullamme ennen varausta.",
+          "Laadukas amerikkalainen ikkunakalvo asennetaan tietokoneohjatusti tai käsin leikaten, jolloin reuna istuu tiiviisti jokaiseen ikkunaan. Valitse kuudesta sävystä, 5–70 % VLT, ja esikatsele niitä kalvotyökalullamme ennen varausta.",
       },
       {
         slug: "residential-window-film",
@@ -540,7 +540,7 @@ const fi: Translations = {
       {
         question: "Mitä kalvosävyjä tarjoatte?",
         answer:
-          "Asennamme kuutta sävyä: 5, 10, 15, 25, 35 ja 50 % VLT. Käytä kalvon esikatselutyökaluamme nähdäksesi jokaisen ennen päätöstä.",
+          "Asennamme kuutta sävyä: 5, 15, 20, 35, 50 ja 70 % VLT. Käytä kalvon esikatselutyökaluamme nähdäksesi jokaisen ennen päätöstä.",
       },
       {
         question: "Mikä sävy on lain mukaan sallittu autooni?",
@@ -555,7 +555,7 @@ const fi: Translations = {
       {
         question: "Kuplivatko, irtoavatko tai muuttuvatko kalvot violeteiksi ajan myötä?",
         answer:
-          "Ei meidän kalvomme kanssa. Jokainen asennus sisältää elinikäisen takuun kuplimista, irtoamista, halkeilua ja värin haalistumista vastaan — käyttämämme kalvo on värjätty ja keraamipitoinen, ei halpaa värjättyä kalvoa, joka haalistuu auringossa.",
+          "Ei meidän kalvomme kanssa. Jokainen asennus sisältää 5 vuoden takuun kuplimista, irtoamista, halkeilua ja värin haalistumista vastaan — käyttämämme kalvo on värjätty ja keraamipitoinen, ei halpaa värjättyä kalvoa, joka haalistuu auringossa.",
       },
       {
         question: "Voitteko poistaa vanhan tai huonokuntoisen kalvon ennen uuden asennusta?",
@@ -677,7 +677,7 @@ const fi: Translations = {
       },
       {
         title: "Takuu koskee kalvoa, ei vain sävyä",
-        body: "Jokaisen asennuksen takana on elinikäinen takuu kuplimista, irtoamista ja värimuutosta vastaan, riippumatta siitä, minkä kuudesta sävystämme valitset.",
+        body: "Jokaisen asennuksen takana on 5 vuoden takuu kuplimista, irtoamista ja värimuutosta vastaan, riippumatta siitä, minkä kuudesta sävystämme valitset.",
       },
     ],
   },
