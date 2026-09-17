@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const ASSET_PATH =
-  "https://cdn.jsdelivr.net/gh/daryakoroleva97-rgb/Kalvotek@9790ed7/public/tint";
+  "https://cdn.jsdelivr.net/gh/daryakoroleva97-rgb/Kalvotek@25caf66/public/tint";
 const COLOR_VALUES = [0, 1, 2, 3, 4, 5, 6];
 const COLOR_NAMES = ["White", "Silver", "Crimson Red", "Green", "Navy Blue", "Anthracite", "Black"];
 const GLASS_VALUES = [0, 70, 50, 35, 20, 15, 5];
@@ -16,7 +16,7 @@ export function TintPreview() {
 
   return (
     <div>
-      <div className="relative mx-auto aspect-[175/158] w-full max-w-[560px] overflow-hidden rounded-2xl border border-border bg-white">
+      <div className="relative mx-auto aspect-[175/158] w-full max-w-[560px] overflow-hidden rounded-2xl border border-border bg-[#eeeff1]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`${ASSET_PATH}/colorimg-${COLOR_VALUES[colorIndex]}.jpg`}
