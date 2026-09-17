@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import type { faqs as faqsType } from "@/lib/site-config";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-export function FaqAccordion({ faqs }: { faqs: typeof faqsType }) {
+export function FaqAccordion() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <div className="divide-y divide-border rounded-2xl border border-border bg-surface">
-      {faqs.map((faq, index) => {
+      {t.faq.items.map((faq, index) => {
         const open = openIndex === index;
         return (
           <div key={faq.question}>

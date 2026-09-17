@@ -1,34 +1,27 @@
+"use client";
+
 import Link from "next/link";
+import { Logo } from "@/components/layout/Logo";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { siteConfig } from "@/lib/site-config";
 
-const columns = [
-  {
-    title: "Explore",
-    links: [
-      { href: "/services", label: "Services" },
-      { href: "/tint", label: "Tint Preview" },
-      { href: "/process", label: "The Process" },
-      { href: "/faq", label: "FAQ" },
-      { href: "/location", label: "Location & Hours" },
-    ],
-  },
-];
-
 export function Footer() {
+  const { t } = useLanguage();
+
+  const links = [
+    { href: "/services", label: t.nav.services },
+    { href: "/tint", label: t.nav.tint },
+    { href: "/process", label: t.nav.process },
+    { href: "/faq", label: t.nav.faq },
+    { href: "/location", label: t.nav.location },
+  ];
+
   return (
     <footer className="border-t border-border bg-surface">
       <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr]">
         <div>
-          <div className="flex items-center gap-2 font-semibold text-lg">
-            <span
-              aria-hidden
-              className="flex h-8 w-8 items-center justify-center rounded-md bg-accent text-accent-foreground text-sm font-bold"
-            >
-              K
-            </span>
-            {siteConfig.name}
-          </div>
-          <p className="mt-4 max-w-sm text-sm text-muted">{siteConfig.tagline}</p>
+          <Logo className="h-9 w-auto" />
+          <p className="mt-4 max-w-sm text-sm text-muted">{t.footer.tagline}</p>
           <div className="mt-6 space-y-1 text-sm text-muted">
             <p>{siteConfig.address.full}</p>
             <p>
@@ -41,30 +34,30 @@ export function Footer() {
                 {siteConfig.email}
               </a>
             </p>
-            <p className="text-xs text-muted/80">Y-tunnus (Business ID): {siteConfig.businessId}</p>
+            <p className="text-xs text-muted/80">
+              {t.footer.businessId} {siteConfig.businessId}
+            </p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-2">
-          {columns.map((col) => (
-            <div key={col.title}>
-              <h3 className="text-sm font-semibold text-foreground">{col.title}</h3>
-              <ul className="mt-4 space-y-2 text-sm text-muted">
-                {col.links.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="hover:text-accent">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            <h3 className="text-sm font-semibold text-foreground">{t.footer.explore}</h3>
+            <ul className="mt-4 space-y-2 text-sm text-muted">
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-accent">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
       <div className="border-t border-border py-6">
         <p className="container-page text-xs text-muted">
-          © {new Date().getFullYear()} {siteConfig.fullName}. All rights reserved.
+          {t.footer.rightsReserved(new Date().getFullYear(), siteConfig.fullName)}
         </p>
       </div>
     </footer>
