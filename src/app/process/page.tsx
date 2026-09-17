@@ -67,11 +67,11 @@ export default function ProcessPage() {
       <div className="mt-16 rounded-2xl border border-accent/30 bg-accent-soft p-8 text-center">
         <h2 className="text-xl font-bold">Curious how a shade will look first?</h2>
         <p className="mt-2 text-sm text-muted">
-          Try our 3D visualizer, then book your ~2 hour install online.
+          Try our tint preview, then book your ~2 hour install online.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
-          <ButtonLink href="/visualizer" variant="secondary">
-            Open visualizer
+          <ButtonLink href="/tint" variant="secondary">
+            Open tint preview
           </ButtonLink>
           <BookNowButton />
         </div>

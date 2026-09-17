@@ -9,7 +9,6 @@ import { siteConfig } from "@/lib/site-config";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
-  { href: "/visualizer", label: "3D Visualizer" },
   { href: "/tint", label: "Tint Preview" },
   { href: "/process", label: "The Process" },
   { href: "/faq", label: "FAQ" },

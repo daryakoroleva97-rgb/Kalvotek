@@ -40,11 +40,11 @@ export default function Home() {
             </h1>
             <p className="mt-5 max-w-xl text-muted">
               {siteConfig.fullName} installs precision-cut window film in six shades, from a light
-              factory-style 50% down to a limo-dark 5%. Preview every shade on a 3D car before you
-              commit, then book your install online.
+              factory-style 50% down to a limo-dark 5%. Preview every shade before you commit, then
+              book your install online.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="/visualizer">Try the 3D Visualizer</ButtonLink>
+              <ButtonLink href="/tint">Try the Tint Preview</ButtonLink>
               <BookNowButton />
             </div>
           </div>
@@ -52,13 +52,13 @@ export default function Home() {
           <div className="relative">
             <div className="rounded-2xl border border-border bg-surface p-4">
               <PhotoPlaceholder
-                label="3D tint visualizer preview"
+                label="Tint preview"
                 variant={1}
                 className="h-64 w-full sm:h-80"
               />
               <div className="mt-4 flex items-center justify-between text-sm">
-                <span className="text-muted">Pick a model, color & shade</span>
-                <Link href="/visualizer" className="font-semibold text-accent hover:underline">
+                <span className="text-muted">Pick a color & glass tint</span>
+                <Link href="/tint" className="font-semibold text-accent hover:underline">
                   Open tool →
                 </Link>
               </div>
@@ -104,11 +104,11 @@ export default function Home() {
             <div>
               <p className="text-sm font-semibold uppercase tracking-wide text-accent">Shade lineup</p>
               <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
-                Six shades, one visualizer
+                Six shades to choose from
               </h2>
             </div>
-            <ButtonLink href="/visualizer" variant="secondary">
-              Compare shades
+            <ButtonLink href="/tint" variant="secondary">
+              Preview shades
             </ButtonLink>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">

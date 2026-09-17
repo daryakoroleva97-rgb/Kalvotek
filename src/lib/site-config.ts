@@ -91,7 +91,7 @@ export const services: Service[] = [
     name: "Car Window Tinting",
     shortDescription: "Precision-cut film in six shades, backed by a 5-year warranty.",
     description:
-      "Premium American window film installed with a computer-plotted or hand cut for a flush, gap-free edge on every window. Choose from six shades, 5% to 50% VLT, and preview them on our 3D visualizer before you book.",
+      "Premium American window film installed with a computer-plotted or hand cut for a flush, gap-free edge on every window. Choose from six shades, 5% to 50% VLT, and preview them on our tint tool before you book.",
   },
   {
     slug: "residential-window-film",
@@ -128,40 +128,6 @@ export const services: Service[] = [
     description:
       "A tinted film layer applied over headlight or taillight lenses for a smoked, custom look, installed to stay street-legal for on-road use.",
   },
-];
-
-export type CarModelOption = {
-  id: string;
-  name: string;
-  bodyType: string;
-};
-
-// Modeled on Volvo's current lineup as the visualizer's demo vehicle —
-// pick whichever silhouette is closest to your own car's shape.
-export const carModels: CarModelOption[] = [
-  { id: "s60", name: "S60", bodyType: "Volvo sedan" },
-  { id: "xc90", name: "XC90", bodyType: "Volvo 3-row SUV" },
-  { id: "v60", name: "V60", bodyType: "Volvo wagon" },
-  { id: "c40", name: "C40", bodyType: "Volvo coupe SUV" },
-];
-
-export type CarColorOption = {
-  id: string;
-  name: string;
-  hex: string;
-  metalness: number;
-  roughness: number;
-};
-
-export const carColors: CarColorOption[] = [
-  { id: "alpine-white", name: "Alpine White", hex: "#f2f3f5", metalness: 0.6, roughness: 0.25 },
-  { id: "jet-black", name: "Jet Black", hex: "#131417", metalness: 0.7, roughness: 0.2 },
-  { id: "silver", name: "Brilliant Silver", hex: "#c7cbd1", metalness: 0.8, roughness: 0.2 },
-  { id: "gunmetal", name: "Gunmetal Grey", hex: "#4b4f57", metalness: 0.75, roughness: 0.25 },
-  { id: "midnight-blue", name: "Midnight Blue", hex: "#132743", metalness: 0.6, roughness: 0.25 },
-  { id: "crimson", name: "Crimson Red", hex: "#7a1420", metalness: 0.55, roughness: 0.3 },
-  { id: "racing-green", name: "Racing Green", hex: "#12392b", metalness: 0.55, roughness: 0.3 },
-  { id: "sunset-orange", name: "Sunset Orange", hex: "#c1531f", metalness: 0.5, roughness: 0.35 },
 ];
 
 export const processSteps = [
@@ -241,7 +207,7 @@ export const faqs = [
   {
     question: "What tint shades do you offer?",
     answer:
-      "We install six shades: 5%, 10%, 15%, 25%, 35%, and 50% VLT. Use our 3D visualizer to preview each one on your vehicle's color and body style before you decide.",
+      "We install six shades: 5%, 10%, 15%, 25%, 35%, and 50% VLT. Use our tint preview tool to see each one before you decide.",
   },
   {
     question: "Which shade is legal for my car?",
